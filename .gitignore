@@ -3,10 +3,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-static/**
-node_modules/**
-node/**
-ui-static/node/**
+/home/ashraf/Downloads/pere/src/main/resources/static/**
+/home/ashraf/Downloads/pere/src/main/resources/ui-static/node_modules/**
+/home/ashraf/Downloads/pere/src/main/resources/ui-static/node/**
 
 ### STS ###
 .apt_generated
