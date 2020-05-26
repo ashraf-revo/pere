@@ -13,6 +13,7 @@ matrix:
       cache:
         directories:
           - $HOME/.m2
+          - $TRAVIS_BUILD_DIR/src/main/resources/ui-static/node
       deploy:
         - provider: cloudfoundry
           username: $USERNAME
