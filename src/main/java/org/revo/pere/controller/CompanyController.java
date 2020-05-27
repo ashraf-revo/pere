@@ -4,6 +4,7 @@ import org.revo.pere.domain.Company;
 import org.revo.pere.model.Search;
 import org.revo.pere.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class CompanyController {
     }
 
     @PostMapping("search")
-    public ResponseEntity<Iterable<Company>> search(@RequestBody @Valid Search search) {
+    public ResponseEntity<Page<Company>> search(@RequestBody @Valid Search search) {
         return ResponseEntity.ok(companyService.findAllBy(search));
     }
 

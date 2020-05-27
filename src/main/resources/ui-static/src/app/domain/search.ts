@@ -8,3 +8,4 @@ export class Search {
   property: PropertyDirection;
   value: string;
 }
+

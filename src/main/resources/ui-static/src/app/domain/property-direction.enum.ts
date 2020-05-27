@@ -1,3 +1,3 @@
 export enum PropertyDirection {
-  id, name, email
+  id='id', name='name', email='email'
 }

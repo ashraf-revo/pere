@@ -2,6 +2,7 @@ package org.revo.pere.service;
 
 import org.revo.pere.domain.Company;
 import org.revo.pere.model.Search;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,5 +18,5 @@ public interface CompanyService {
 
     void delete(Long id);
 
-    List<Company> findAllBy(Search pageable);
+    Page<Company> findAllBy(Search pageable);
 }
