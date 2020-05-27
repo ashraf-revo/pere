@@ -17,8 +17,18 @@ public class PereApplication {
     @Bean
     public CommandLineRunner runner(CompanyService companyService) {
         return args -> {
-            companyService.save(Company.builder().name("asge").email("fdfd@fd.com").build());
-            companyService.save(Company.builder().name("asge").email("fdfd@fd.com").build());
+            companyService.save(Company.builder().name("ashraf").email("ashraf@fd.com").build());
+            companyService.save(Company.builder().name("ashraf").email("ashraf@fd.com").build());
+            companyService.save(Company.builder().name("ashraf").email("ashraf@fd.com").build());
+            companyService.save(Company.builder().name("ashraf").email("ashraf@fd.com").build());
+            companyService.save(Company.builder().name("ashraf").email("ashraf@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
+            companyService.save(Company.builder().name("khalid").email("khalid@fd.com").build());
         };
     }
 }

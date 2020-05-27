@@ -1,7 +1,8 @@
 package org.revo.pere.controller;
 
-import org.revo.pere.service.CompanyService;
 import org.revo.pere.domain.Company;
+import org.revo.pere.model.Search;
+import org.revo.pere.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +26,21 @@ public class CompanyController {
         return ResponseEntity.ok(companyService.findAll());
     }
 
+    @PostMapping("search")
+    public ResponseEntity<Iterable<Company>> search(@RequestBody @Valid Search search) {
+        return ResponseEntity.ok(companyService.findAllBy(search));
+    }
+
     @PostMapping
     public ResponseEntity<Company> save(@RequestBody @Valid Company company) {
-        company.setId(null);
         Company save = companyService.save(company);
         return save.getId() != null ? ResponseEntity.ok(save) : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Company> update(@PathVariable Long id, @RequestBody Company company) {
-        return companyService.findOne(id).map(it -> ResponseEntity.ok(companyService.save(it, company)))
-                .orElse(ResponseEntity.badRequest().build());
+    public ResponseEntity<Company> update(@PathVariable Long id, @RequestBody @Valid Company company) {
+        Company save = companyService.save(id,company);
+        return save.getId() != null ? ResponseEntity.ok(save) : ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("{id}")

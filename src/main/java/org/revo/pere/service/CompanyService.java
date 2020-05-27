@@ -1,7 +1,9 @@
 package org.revo.pere.service;
 
 import org.revo.pere.domain.Company;
+import org.revo.pere.model.Search;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CompanyService {
@@ -11,7 +13,9 @@ public interface CompanyService {
 
     Optional<Company> findOne(Long id);
 
-    Company save(Company current, Company company);
+    Company save(Long id, Company company);
 
     void delete(Long id);
+
+    List<Company> findAllBy(Search pageable);
 }
