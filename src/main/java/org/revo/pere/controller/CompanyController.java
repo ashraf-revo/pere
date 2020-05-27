@@ -13,8 +13,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/v1/company")
 public class CompanyController {
-    @Autowired
-    private CompanyService companyService;
+    private final CompanyService companyService;
+
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<Optional<Company>> findOne(@PathVariable("id") Long id) {
