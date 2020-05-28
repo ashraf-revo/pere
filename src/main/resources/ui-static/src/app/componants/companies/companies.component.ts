@@ -54,6 +54,7 @@ export class CompaniesComponent implements OnInit {
   };
   error = error => {
     console.log("error")
+    console.log(error)
   };
 
   save(form: NgForm) {

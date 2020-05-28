@@ -1,6 +1,7 @@
 package org.revo.pere.service.impl;
 
 import org.revo.pere.domain.Company;
+import org.revo.pere.execption.EmailExistException;
 import org.revo.pere.model.Search;
 import org.revo.pere.repository.CompanyRepository;
 import org.revo.pere.service.CompanyService;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +28,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Company save(Company company) {
         company.setId(null);
+        if (companyRepository.findByEmail(company.getEmail()).isPresent()) {
+            throw new EmailExistException("already exist", "email",company.getEmail());
+        }
         return companyRepository.save(company);
     }
 
@@ -38,6 +41,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company save(Long id, Company company) {
+        Optional<Company> byEmail = companyRepository.findByEmail(company.getEmail());
+        if (byEmail.isPresent() && !byEmail.get().getId().equals(id)) {
+            throw new EmailExistException("already exist", "email",company.getEmail());
+        }
         return findOne(id).map(it -> {
             company.setId(id);
             return companyRepository.save(company);
