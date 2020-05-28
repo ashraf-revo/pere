@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ashraf-revo/pere.svg?branch=master)](https://travis-ci.org/ashraf-revo/pere)
+[![Build Status](https://travis-ci.com/ashraf-revo/pere.svg?branch=master)](https://travis-ci.com/ashraf-revo/pere)
 ## Pere 
 * this is pere task*
 
