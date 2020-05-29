@@ -14,6 +14,7 @@ export class CompanyFormComponent implements OnInit {
   submitted: boolean = false;
   @Output()
   onLoad: EventEmitter<string> = new EventEmitter();
+  beErrors: Map<string,string> = new Map<string, string>();
 
   constructor(private companiesService: CompaniesService) {
   }
@@ -23,11 +24,11 @@ export class CompanyFormComponent implements OnInit {
 
   success = it => {
     this.submitted = false;
+    this.beErrors = new Map<string, string>();
     this.onLoad.emit("load")
   };
   error = error => {
-    console.log("error")
-    console.log(error)
+    this.beErrors = error.error;
   };
 
   save(form: NgForm) {
@@ -42,5 +43,9 @@ export class CompanyFormComponent implements OnInit {
 
   reset() {
     this.success("load")
+  }
+
+  clearBeError(name: string) {
+    delete this.beErrors[name];
   }
 }

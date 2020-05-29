@@ -9,14 +9,24 @@
     <div class="form-group col-md-6">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" placeholder="Email" required [(ngModel)]="company.email"
-             name="email" #email="ngModel">
-      <span class="text-danger" [hidden]="!submitted||email.valid">error</span>
+             [ngClass]="{'is-invalid':submitted&&(!email.valid||beErrors['email']!=null)}"
+             (change)="clearBeError('email')" name="email" #email="ngModel">
+      <div class="text-danger" [hidden]="!submitted||(email.valid&&beErrors['email']==null)">
+        <span *ngIf="beErrors['email']">{{beErrors['email']}}</span>
+        <span *ngIf="email?.errors?.required">email required</span>
+      </div>
     </div>
     <div class="form-group col-md-6">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Name" required minlength="3"
-             [(ngModel)]="company.name" name="name" #name=ngModel>
-      <span class="text-danger" [hidden]="!submitted||name.valid">error</span>
+             [(ngModel)]="company.name"
+             [ngClass]="{'is-invalid':submitted&&(!name.valid||beErrors['name']!=null)}" (change)="clearBeError('name')"
+             name="name" #name="ngModel">
+      <div class="text-danger" [hidden]="!submitted||(name.valid&&beErrors['name']==null)">
+        <span *ngIf="beErrors['name']">{{beErrors['name']}}</span>
+        <span *ngIf="name?.errors?.required">name required</span>
+        <span *ngIf="name?.errors?.minlength">name min length 3</span>
+      </div>
     </div>
   </div>
   <div class="form-group">
