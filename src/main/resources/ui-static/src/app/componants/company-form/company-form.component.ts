@@ -43,6 +43,7 @@ export class CompanyFormComponent implements OnInit {
 
   reset() {
     this.success("load")
+    this.beErrors = new Map<string, string>();
   }
 
   clearBeError(name: string) {
