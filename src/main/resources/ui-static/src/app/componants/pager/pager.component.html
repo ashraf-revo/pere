@@ -1,0 +1,14 @@
+<button type="button" class="btn btn-success btn-sm m-1" [ngClass]="{'disabled':this.search.page<1}"
+        (click)="prev()">
+  <i class="fas fa-caret-left"></i>
+</button>
+<label for="size"></label>
+<select id="size" class="form-control-sm m-1" [(ngModel)]="search.size" (change)="this.search.page = 0;load()">
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+</select>
+<button type="button" class="btn btn-success btn-sm m-1" (click)="next()"
+        [ngClass]="{'disabled':this.search.page+1>=totalPages}">
+  <i class="fas fa-caret-right"></i>
+</button>

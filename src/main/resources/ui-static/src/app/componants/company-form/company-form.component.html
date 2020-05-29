@@ -1,0 +1,32 @@
+<form (submit)="save(form)" #form="ngForm">
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="id">Id</label>
+      <input type="text" class="form-control" id="id" disabled [ngModel]="company.id" name="id">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Email" required [(ngModel)]="company.email"
+             name="email" #email="ngModel">
+      <span class="text-danger" [hidden]="!submitted||email.valid">error</span>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name" required minlength="3"
+             [(ngModel)]="company.name" name="name" #name=ngModel>
+      <span class="text-danger" [hidden]="!submitted||name.valid">error</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="hideMe" [(ngModel)]="company.hideMe" name="hideMe">
+      <label class="form-check-label" for="hideMe">
+        Hide Me
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary m-1">Save</button>
+  <button type="button" class="btn btn-danger m-1" (click)="reset()">Reset</button>
+</form>

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CompaniesService} from "../../services/companies.service";
 import {Search} from "../../domain/search";
 import {Company} from "../../domain/company";
-import {NgForm} from "@angular/forms";
 import {PropertyDirection} from "../../domain/property-direction.enum";
 import {Direction} from "../../domain/direction.enum";
 import {Page} from "../../domain/page";
@@ -14,9 +13,8 @@ import {Page} from "../../domain/page";
 })
 export class CompaniesComponent implements OnInit {
   search: Search = new Search();
-  company: Company = new Company();
   companies: Page<Company>;
-  submitted: boolean = false;
+  selectedCompany: Company = new Company();
 
   constructor(private companiesService: CompaniesService) {
     this.search.size = 5;
@@ -24,65 +22,31 @@ export class CompaniesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.load();
+    this.load("load");
   }
 
-  next() {
-    if (this.search.page + 1 < this.companies.totalPages) {
-      this.search.page++;
-      this.load()
-    }
+
+  load($event: string) {
+    this.selectedCompany = new Company();
+    this.companiesService.search(this.search).subscribe(it => this.companies = it, this.error);
   }
 
-  prev() {
-    if (this.search.page > 0) {
-      this.search.page--;
-      this.load()
-    }
+  setCompany(c: Company) {
+    this.selectedCompany = c;
   }
 
-  load() {
-    this.companiesService.search(this.search).subscribe(it => {
-      this.companies = it;
-    });
+  delete(id: number) {
+    this.companiesService.delete(id).subscribe(it => this.load("load"), this.error)
   }
 
-  success = it => {
-    this.company = new Company();
-    this.submitted = false;
-    this.load()
-  };
   error = error => {
     console.log("error")
     console.log(error)
   };
 
-  save(form: NgForm) {
-    this.submitted = true;
-    if (form.valid) {
-      if (this.company.id)
-        this.companiesService.update(this.company).subscribe(this.success, this.error)
-      else
-        this.companiesService.save(this.company).subscribe(this.success, this.error)
-    }
-  }
-
-  setCompany(c: Company) {
-    Object.assign(this.company, c);
-  }
-
-  delete(id: number) {
-    this.companiesService.delete(id).subscribe(this.success, this.error)
-  }
-
   setFilter(id: string) {
     this.search.property = PropertyDirection[id];
     this.search.direction = (this.search.direction == Direction.DESC ? Direction.ASC : Direction.DESC);
-    this.load();
-  }
-
-  filter() {
-    this.search.page = 0;
-    this.load();
+    this.load("load");
   }
 }
