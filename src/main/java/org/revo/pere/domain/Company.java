@@ -22,7 +22,7 @@ public class Company {
     @Id
     @GeneratedValue
     private Long id;
-    @Size(min = 1, max = 20)
+    @Size(min = 3, max = 20)
     @NotBlank
     private String name;
     @Email

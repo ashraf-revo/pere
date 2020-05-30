@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface CompanyRepository extends CrudRepository<Company, Long> {
-    Page<Company> findAllByEmailLikeOrNameLike(String email, String name, Pageable pageable);
+    Page<Company> findAllByEmailContainsOrNameContains(String email, String name, Pageable pageable);
 
     Page<Company> findAllBy(Pageable pageable);
 

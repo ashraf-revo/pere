@@ -60,11 +60,11 @@ public class CompanyServiceImpl implements CompanyService {
     public Page<Company> findAllBy(Search search) {
         if (search.getProperty() != null && search.getValue() != null && !search.getValue().trim().equals("") && search.getDirection() != null) {
             PageRequest of = PageRequest.of(search.getPage(), search.getSize(), Sort.by(search.getDirection(), search.getProperty().name()));
-            return companyRepository.findAllByEmailLikeOrNameLike(search.getValue().trim(), search.getValue().trim(), of);
+            return companyRepository.findAllByEmailContainsOrNameContains(search.getValue().trim(), search.getValue().trim(), of);
         }
         if (search.getValue() != null && !search.getValue().trim().equals("")) {
             PageRequest of = PageRequest.of(search.getPage(), search.getSize());
-            return companyRepository.findAllByEmailLikeOrNameLike(search.getValue().trim(), search.getValue().trim(), of);
+            return companyRepository.findAllByEmailContainsOrNameContains(search.getValue().trim(), search.getValue().trim(), of);
         }
         if (search.getProperty() != null) {
             PageRequest of = PageRequest.of(search.getPage(), search.getSize(), Sort.by(search.getDirection(), search.getProperty().name()));
