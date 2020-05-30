@@ -19,7 +19,7 @@ public class PereApplication {
         return args -> {
             companyService.save(Company.builder().name("ashraf").email("ashraf@gmail.com").build());
             companyService.save(Company.builder().name("revo").email("revo@gmail.com").build());
-            companyService.save(Company.builder().name("mix").email("mix@gmail.com").build());
+            companyService.save(Company.builder().name("khaled").email("khaled@gmail.com").build());
         };
     }
 }
