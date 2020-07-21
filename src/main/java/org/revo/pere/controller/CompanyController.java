@@ -58,20 +58,19 @@ public class CompanyController {
     }
 
     private Pattern compile = Pattern.compile(".+_(DO|RA|FLEET)-[0-9]+");
-    private WebClient webClient = WebClient.create("https://api.github.com/repos/elmenus/branches-restrictions-POC/git");
+    private WebClient webClient = WebClient.create("https://api.github.com/repos/elmenus/branches-restrictions-POC/git/");
 
     @PostMapping("call")
-    public Mono<String> call(@RequestBody Call call) {
-
+    public Mono<String> call(@RequestBody Call call) throws InterruptedException {
+        Thread.sleep(5000);
         if (call.getRef().startsWith("refs/heads")) {
-            boolean matches = compile.matcher(call.getRef()).matches();
-            if (matches) {
+            if (compile.matcher(call.getRef()).matches()) {
                 return Mono.just("Branch name matches the regex");
             } else {
                 return webClient.delete()
                         .uri(call.getRef())
                         .header("Authorization", "Basic YXNocmFmLWF0ZWY6ZWYwZGEzN2U2NjRmNDJhNmZiZDkzYjA0ZGNiZWY4YTNhYzc2ZjE3YQ==")
-                        .exchange().map(it -> "deleted");
+                        .exchange().flatMap(it -> it.bodyToMono(String.class));
             }
         } else
             return Mono.just("Not a branch");
