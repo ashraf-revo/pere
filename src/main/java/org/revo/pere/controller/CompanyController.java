@@ -59,7 +59,7 @@ public class CompanyController {
     
         @PostMapping("sfs")
     public ResponseEntity<String> saveee(@RequestBody String sf) {
-        return sf;
+        return ResponseEntity.ok(sf);
     }
 
     
