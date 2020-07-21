@@ -54,4 +54,13 @@ public class CompanyController {
             return ResponseEntity.ok().build();
         }).orElse(ResponseEntity.badRequest().build());
     }
+    
+    
+    
+        @PostMapping
+    public ResponseEntity<String> saveee(@RequestBody @String sf) {
+        return sf;
+    }
+
+    
 }
